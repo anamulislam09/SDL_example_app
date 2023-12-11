@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\EditEssay;
 use App\Models\Essay;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EditEssayController extends Controller
 {
 
-    // public function showUpdate($id)
+    // public function editableEssay($maxNo)
     // {
-    //     $data = EditEssay::where('eassy_id','=',$id);
-    //     dd($data);
-    //     return view('pages.essay.edit', compact('data'));
+    //     $data = DB::table('edit_essays')->where('update_id', '=', $maxNo)
+    //         ->first();
+    //     return view('pages.essay.singleEdit', compact('data'));
     // }
 
 }

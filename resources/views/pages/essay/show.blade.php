@@ -23,11 +23,12 @@
                                         <label for="searchbox" class="mt-2">Search</label>
                                     </div>
                                     <div class="col-2">
-                                        <a href="{{ route('essay.editeditable') }}" class="btn btn-sm btn-outline-info" style="float:right">Editable essay
-                                            </a>
+                                        {{-- <a href="{{ route('essay.editeditable') }}" class="btn btn-sm btn-outline-info" style="float:right">Editable essay
+                                            </a> --}}
                                     </div>
                                     <div class="col-2">
-                                        <a href="{{ route('essay.create') }}" class="btn btn-sm btn-outline-primary" style="float:right">Add
+                                        <a href="{{ route('essay.create') }}" class="btn btn-sm btn-outline-primary"
+                                            style="float:right">Add
                                             New</a>
                                     </div>
                                 </div>
@@ -56,9 +57,12 @@
                                                 <td>{!! $item->description3 !!}</td>
                                                 <td>{!! $item->date !!}</td>
                                                 <td>
-                                                    <a href="{{route('essay.pdf', $item->id)}}" class="btn btn-outline-success btn-sm">Print</a>
-                                                    <a href="{{route('essay.edit', $item->id)}}" class="btn btn-outline-primary btn-sm">Edit</a>
-                                                    <a href="{{route('essay.delete', $item->id)}}" class="btn btn-outline-danger btn-sm">Delete</a>
+                                                    <a href="{{ route('essay.pdf', $item->id) }}"
+                                                        class="btn btn-outline-success btn-sm">Print</a>
+                                                    <a href="{{ route('essay.edit', $item->id) }}"
+                                                        class="btn btn-outline-primary btn-sm">Edit</a>
+                                                    <a href="{{ route('essay.delete', $item->id) }}"
+                                                        class="btn btn-outline-danger btn-sm">Delete</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -77,21 +81,17 @@
         $(document).ready(function() {
             // Hide the entire table initially
             $('table').hide();
-
             $('#searchInput').on('input', function() {
                 var searchText = $(this).val().toLowerCase();
-
                 // Show/hide the entire table based on the search input
                 if (searchText === '') {
                     $('table').hide();
                 } else {
                     $('table').show();
                 }
-
                 // Loop through each table row
                 $('table tbody tr').each(function() {
                     var rowData = $(this).text().toLowerCase();
-
                     // Show/hide the row based on the search input
                     if (rowData.includes(searchText)) {
                         $(this).show();

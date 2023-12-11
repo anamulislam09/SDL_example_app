@@ -39,7 +39,14 @@
                                     <p>{!! $data->description3 !!}</p>
                                 </div>
                             </div>
-
+                            <div class="card-footer">
+                               <div class="row">
+                                <div class="col-10"></div>
+                                <div class="col-2">
+                                    <a href="{{route('editEssay.pdf', $data->id)}}" class="btn btn-outline-success">Print</a>
+                                </div>
+                               </div>
+                            </div>
                         </div>
                     </div>
                 </div>

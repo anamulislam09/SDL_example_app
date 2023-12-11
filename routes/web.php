@@ -85,8 +85,14 @@ Route::controller(EssayController::class)->group(function () {
     Route::get('/essay-esit/{id}', 'edit')->name('essay.edit');
     Route::post('/essay-update', 'update')->name('essay.update');
     Route::get('/essay-delete/{id}', 'destroy')->name('essay.delete');
-    
+
+    // show single update 
+    Route::get('/show-update-essay/{maxNo}/{id}', 'showUpdateEssay')->name('update.essay.show');
+
  // QRcode and pdf route here
     Route::get('/essay-pdf/{id}', 'essayPdf')->name('essay.pdf');
+
+ // QRcode and pdf after edit route here
+    Route::get('/edit-essay-pdf/{id}', 'editEssayPdf')->name('editEssay.pdf');
 
 });

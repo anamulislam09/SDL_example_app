@@ -16,6 +16,7 @@ class EssayController extends Controller
         $data = Essay::orderBy('id', 'DESC')->get();
         return view('pages.essay.index', compact('data'));
     }
+
     // create essay 
     public function create()
     {
@@ -25,23 +26,19 @@ class EssayController extends Controller
     // store essay 
     public function store(Request $request)
     {
-
         $request->validate([
             'title' => 'required|unique:essays|max:100',
         ]);
-
-        // using eloquent orm
         Essay::insert([
             'title' => $request->title,
             'description1' => $request->description1,
             'description2' => $request->description2,
             'description3' => $request->description3,
             'date' => date('Y-m-d H:i:s'),
-
         ]);
-
         return redirect()->route('essay.index');
     }
+
     // show essay another page
     public function show()
     {
@@ -78,18 +75,26 @@ class EssayController extends Controller
             'description3' => $request->description3,
             'date' => date('Y-m-d H:i:s'),
         ]);
+        return redirect()->route('update.essay.show',[$maxNo,$id]);
+    }
 
-        $data = DB::table('edit_essays')->where('essay_id', '=', $id)
-            ->where('update_id', '=', $maxNo)
+    public function showUpdateEssay($maxNo,$id)
+    {
+       $data = DB::table('edit_essays')->where('essay_id', '=', $id)->where('update_id', '=', $maxNo)
             ->first();
         return view('pages.essay.singleEdit', compact('data'));
     }
 
-    public function editableEssay()
+    // Delete essay 
+    public function editEssayPdf($id)
     {
-        $data = EditEssay::orderBy('id', 'DESC')->get();
-        return view('pages.essay.show_editable_essay', compact('data'));
+        $data = EditEssay::FindOrFail($id);
+        $pdf = Pdf::loadView('pages.essay.edit_report', compact('data'));
+        return $pdf->stream('essay.pdf');
     }
+
+
+
 
     // Delete essay 
     public function destroy($id)
